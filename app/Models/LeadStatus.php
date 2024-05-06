@@ -11,6 +11,6 @@ class LeadStatus extends Model
     use HasFactory;
 
     public function leads(): HasMany{
-        return $this->hasMany(Lead::class, 'status_id');
+        return $this->hasMany(Lead::class);
     }
 }

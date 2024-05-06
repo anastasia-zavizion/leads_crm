@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LeadRequest;
+use App\Models\Lead;
+use App\Models\LeadStatus;
 use Illuminate\Http\Request;
 
 class LeadController extends Controller
@@ -19,15 +22,17 @@ class LeadController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Leads/Create', ['statuses'=>LeadStatus::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LeadRequest $request)
     {
-        //
+       $validated = $request->validated();
+       Lead::create($validated);
+       return redirect()->route('leads.index')->with('success','New Lead was created');
     }
 
     /**

@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('address');
+            $table->string('postcode');
+            $table->string('city');
+            $table->string('country');
             $table->enum('gender',Lead::$gender);
             $table->text('description')->nullable();
             $table->foreignIdFor(LeadStatus::class)->constrained();

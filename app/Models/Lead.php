@@ -13,7 +13,9 @@ class Lead extends Model
     public static $gender = ['M','F'];
     public static $status = ['New lead','Customer', 'Deleted'];
 
+    protected $fillable = ['name','first_name','phone','email','address','postcode','city','country','gender','description','lead_status_id'];
+
     public function status(): BelongsTo{
-        return $this->belongsTo(LeadStatus::class,'status_id');
+        return $this->belongsTo(LeadStatus::class);
     }
 }

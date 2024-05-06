@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .label{
+        @apply block text-gray-800 font-medium;
+
+    }
+
+    .linkSubMenu{
+        @apply  block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white;
+    }
+
+    .input{
+        @apply block w-full border-gray-200 p-2 border;
+    }
+
+    .textarea{
+        @apply block w-full border-gray-200 p-2 border h-32;
+    }
+
+    .combobox{
+        @apply form-select block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500;
+    }
+
+    .btn{
+        @apply bg-indigo-600  hover:bg-indigo-500 text-white font-medium p-2 rounded;
+    }
+    .btnSmall{
+        @apply bg-indigo-600  hover:bg-indigo-500 text-white font-medium p-1 rounded;
+    }
+
+    .inputError{
+        @apply text-sm text-red-500;
+
+    }
+
+    .th{
+        @apply px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase whitespace-nowrap;
+    }
+    .td{
+        @apply px-4 py-3 text-left text-sm text-gray-600 whitespace-nowrap;
+    }
+
+    .infoAlert{
+        @apply inline-flex items-center px-2 py-1 mr-2 text-base font-bold text-white rounded-full bg-indigo-600;
+    }
+
+    .baseInput{
+        @apply w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500;
+    }
+}
+

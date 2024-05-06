@@ -22,6 +22,9 @@ class LeadFactory extends Factory
             'phone'=>fake()->phoneNumber,
             'email'=>fake()->email,
             'address'=>fake()->address,
+            'postcode'=>fake()->postcode,
+            'city'=>fake()->city,
+            'country'=>fake()->country,
             'gender'=>fake()->randomElement(Lead::$gender),
             'description'=>fake()->paragraph(2),
         ];
