@@ -32,21 +32,9 @@ class LeadController extends Controller
      */
     public function store(LeadRequest $request)
     {
-        try {
-            $validated = $request->validated(); // This line throws an exception on validation failure
-
-            Lead::create($validated);
-
-            dd('ddd');
-
-          //  return redirect()->route('leads.index')->with('success', 'New Lead was created');
-        } catch (ValidationException $e) {
-            dd($e->validator->errors());
-
-            return back()->withErrors($e->validator->errors())->withInput();
-        }
-
-
+        $validated = $request->validated();
+        Lead::create($validated);
+        return redirect()->route('leads.index')->with('success', 'New Lead was created');
     }
 
     /**
@@ -62,15 +50,17 @@ class LeadController extends Controller
      */
     public function edit(Lead $lead)
     {
-        return inertia('Leads/Edit',['lead'=>$lead]);
+        return inertia('Leads/Edit',['lead'=>$lead, 'statuses'=>LeadStatus::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(LeadRequest $request, Lead $lead)
     {
-        //
+        $validated = $request->validated();
+        $lead->update($validated);
+        return redirect()->route('leads.index')->with('success', 'Lead was updated');
     }
 
     /**

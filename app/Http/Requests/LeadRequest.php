@@ -31,7 +31,7 @@ class LeadRequest extends FormRequest
             'city'=>'required|string|min:3|max:20',
             'country'=>'required|string|min:3|max:20',
             'gender'=>'in:'.implode(',',Lead::$gender),
-            'email'=>'required|string|min:6|max:30|unique:leads,email',
+            'email'=>'required|string|min:6|max:30|unique:leads,email,'.$this->lead->id,
             'description'=>'nullable|string|max:255',
             'lead_status_id'=>'required|exists:lead_statuses,id',
             'lat'=>'nullable',
