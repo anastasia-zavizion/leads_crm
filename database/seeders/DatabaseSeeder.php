@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             LeadStatus::create(['name'=>$status]);
         }
         $statuses = LeadStatus::all();
-        Lead::factory(20)->create([
+        Lead::factory(50)->create([
             'lead_status_id'=>$statuses->random()->id
         ]);
     }

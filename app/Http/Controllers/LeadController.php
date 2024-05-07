@@ -6,6 +6,7 @@ use App\Http\Requests\LeadRequest;
 use App\Models\Lead;
 use App\Models\LeadStatus;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LeadController extends Controller
 {
@@ -30,9 +31,21 @@ class LeadController extends Controller
      */
     public function store(LeadRequest $request)
     {
-       $validated = $request->validated();
-       Lead::create($validated);
-       return redirect()->route('leads.index')->with('success','New Lead was created');
+        try {
+            $validated = $request->validated(); // This line throws an exception on validation failure
+
+            Lead::create($validated);
+
+            dd('ddd');
+
+          //  return redirect()->route('leads.index')->with('success', 'New Lead was created');
+        } catch (ValidationException $e) {
+            dd($e->validator->errors());
+
+            return back()->withErrors($e->validator->errors())->withInput();
+        }
+
+
     }
 
     /**

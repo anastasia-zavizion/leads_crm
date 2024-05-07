@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Lead;
-use App\Models\LeadStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LeadRequest extends FormRequest
@@ -35,6 +34,8 @@ class LeadRequest extends FormRequest
             'email'=>'required|string|min:6|max:30|unique:leads,email',
             'description'=>'nullable|string|max:255',
             'lead_status_id'=>'required|exists:lead_statuses,id',
+            'lat'=>'nullable',
+            'lg'=>'nullable',
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\MapController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,5 @@ Route::get('/', function () {
 });
 
 Route::resource('leads',LeadController::class);
+Route::resource('map',MapController::class)->only(['index']);
 

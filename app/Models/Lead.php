@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Observers\LeadObserve;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\LeadStatus;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class Lead extends Model
 {
@@ -18,4 +22,23 @@ class Lead extends Model
     public function status(): BelongsTo{
         return $this->belongsTo(LeadStatus::class);
     }
+
+    public function scopeWithCoordinates(Builder $query){
+        $query->where('lat','<>','')->where('lng','<>','');
+    }
+
+    protected function lat(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => floatval($value)
+        );
+    }
+
+    protected function lng(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => floatval($value)
+        );
+    }
+
 }
