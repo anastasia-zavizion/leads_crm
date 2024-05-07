@@ -15,7 +15,8 @@ class LeadController extends Controller
      */
     public function index()
     {
-        return inertia('Leads/Index');
+        $leads = Lead::latest()->get();
+        return inertia('Leads/Index', ['leads'=>$leads]);
     }
 
     /**
@@ -59,9 +60,9 @@ class LeadController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Lead $lead)
     {
-        //
+        return inertia('Leads/Edit',['lead'=>$lead]);
     }
 
     /**
@@ -75,8 +76,9 @@ class LeadController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Lead $lead)
     {
-        //
+        $lead->delete();
+        return redirect()->route('leads.index')->with('success','Lead was deleted');
     }
 }
