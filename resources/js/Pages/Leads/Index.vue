@@ -29,7 +29,7 @@
     </div>
 
     <div class="mt-8">
-        <Link :class="{'bg-emerald-100':link.active}"  v-html="link.label" class="p-4 border border-slate-500"  v-for="(link,index) in props.leads.links" :key="index" :href="link.url"/>
+        <Link :class="{'bg-emerald-300':link.active}"  v-html="link.label" class="p-4 border border-slate-500"  v-for="(link,index) in props.leads.links" :key="index" :href="link.url"/>
     </div>
 
 </div>

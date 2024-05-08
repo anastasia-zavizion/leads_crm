@@ -9,6 +9,15 @@
 
 }
 @layer components {
+
+    .menuLink{
+        @apply block p-2  font-semibold text-white hover:underline rounded;
+    }
+
+    .menuBtn{
+
+    }
+
     .icon{
         @apply h-6 w-6;
     }

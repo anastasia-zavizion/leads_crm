@@ -2,6 +2,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import {ZiggyVue} from '../../vendor/tightenco/ziggy/dist/index';
 import MainLayout from '../js/Pages/Layouts/MainLayout.vue';
+import vueClickOutsideElement from 'vue-click-outside-element'
 
 createInertiaApp({
     resolve: name => {
@@ -14,6 +15,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(vueClickOutsideElement)
             .mount(el)
     },
 })
