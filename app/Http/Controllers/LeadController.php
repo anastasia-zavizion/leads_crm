@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LeadRequest;
 use App\Models\Lead;
 use App\Models\LeadStatus;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -15,7 +16,7 @@ class LeadController extends Controller
      */
     public function index()
     {
-        $leads = Lead::latest()->get();
+        $leads = Lead::latest()->with('status')->paginate(10);
         return inertia('Leads/Index', ['leads'=>$leads]);
     }
 

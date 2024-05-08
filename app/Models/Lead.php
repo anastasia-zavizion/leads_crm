@@ -15,12 +15,14 @@ class Lead extends Model
 {
     use HasFactory;
     public static $gender = ['M','F'];
-    public static $status = ['New lead','Customer', 'Deleted'];
+    public static $status = [
+        ['name'=>'New Lead', 'color'=>'green', 'Customer'=>'orange', 'Deleted'=>'red']
+    ];
 
     protected $fillable = ['name','first_name','phone','email','address','postcode','city','country','gender','description','lead_status_id'];
 
     public function status(): BelongsTo{
-        return $this->belongsTo(LeadStatus::class);
+        return $this->belongsTo(LeadStatus::class, 'lead_status_id');
     }
 
     public function scopeWithCoordinates(Builder $query){

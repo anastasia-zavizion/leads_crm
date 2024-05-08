@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         foreach (Lead::$status as $status){
-            LeadStatus::create(['name'=>$status]);
+            LeadStatus::create(['name'=>$status['name'], 'color'=>$status['color']]);
         }
         $statuses = LeadStatus::all();
         Lead::factory(50)->create([

@@ -1,5 +1,5 @@
 <template>
-    <table class="w-full border border-slate-400 border-separate">
+    <table class="w-full border border-slate-400 border-collapse items-center">
         <thead class="bg-emerald-100">
         <slot name="header"></slot>
         </thead>
