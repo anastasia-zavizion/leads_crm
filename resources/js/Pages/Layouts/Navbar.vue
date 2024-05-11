@@ -73,9 +73,8 @@ function closeNavbar(){
 }
 function showNavbar(){
     navbar.value = true;
-}/*
+}
 import { usePage } from '@inertiajs/vue3';
 let page = usePage()
-let user = computed(() => page.props.user)*/
-let user = null;
+let user = computed(() => page.props.user)
 </script>
