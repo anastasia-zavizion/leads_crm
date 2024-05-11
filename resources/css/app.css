@@ -44,14 +44,14 @@
     }
 
     .combobox{
-        @apply form-select block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500;
+        @apply form-select block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-violet-500 focus:border-violet-500;
     }
 
     .btn{
-        @apply bg-indigo-600  hover:bg-indigo-500 text-white font-medium p-2 rounded;
+        @apply bg-violet-500  hover:bg-violet-700 text-white font-medium p-2 rounded;
     }
     .btnSmall{
-        @apply bg-indigo-600  hover:bg-indigo-500 text-white font-medium p-1 rounded;
+        @apply bg-violet-500  hover:bg-violet-500 text-white font-medium p-1 rounded;
     }
 
     .inputError{
@@ -67,11 +67,11 @@
     }
 
     .infoAlert{
-        @apply inline-flex items-center px-2 py-1 mr-2 text-base font-bold text-white rounded-full bg-indigo-600;
+        @apply inline-flex items-center px-2 py-1 mr-2 text-base font-bold text-white rounded-full bg-violet-500;
     }
 
     .baseInput{
-        @apply w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500;
+        @apply w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:outline-none focus:ring-violet-500 focus:border-violet-500;
     }
 }
 

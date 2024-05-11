@@ -1,6 +1,6 @@
 <template>
     <button type="submit" class="btn">
-        {{title}}
+       <slot></slot>
     </button>
 </template>
 

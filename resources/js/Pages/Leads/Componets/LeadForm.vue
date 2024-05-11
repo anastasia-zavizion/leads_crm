@@ -63,7 +63,7 @@
                 <Error :error="form.errors.description"/>
             </div>
 
-            <Button :title="title"/>
+            <Button>{{title}}</Button>
         </form>
     </FormMainLayout>
 </template>

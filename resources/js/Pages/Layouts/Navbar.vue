@@ -17,18 +17,17 @@
                 <Link class="menuLink" :href="route('leads.index')">Home</Link>
             </li>
 
-            <li>
+            <li v-if="user">
                 <Link class="menuLink" :href="route('leads.index')">Leads</Link>
             </li>
 
-            <li>
+            <li v-if="user">
                 <Link class="menuLink" :href="route('map.index')">Map</Link>
             </li>
 
         </ul>
 
-        <Link class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="#">Sign In</Link>
-        <Link class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Sign up</Link>
+        <Link v-if="!user" class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" :href="route('login')">Sign In</Link>
     </nav>
 
     <div v-if="navbar" class="navbar-menu relative z-50">
@@ -45,13 +44,17 @@
                 </button>
             </div>
             <div>
-                <ul>
-                    <li class="mb-1 bg-violet-500">
+                <ul class="test">
+                    <li v-if="user" class="mb-1 bg-violet-500">
                         <Link class="menuLink" :href="route('leads.index')">Leads</Link>
                     </li>
 
-                    <li class="mb-1 bg-violet-500">
+                    <li v-if="user" class="mb-1 bg-violet-500">
                         <Link class="menuLink" :href="route('map.index')">Map</Link>
+                    </li>
+
+                    <li v-if="!user" class="mb-1">
+                        <Link class="w-full block lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" :href="route('login')">Sign In</Link>
                     </li>
 
                 </ul>
@@ -63,12 +66,16 @@
 <script setup>
 import {Link} from "@inertiajs/vue3";
 
-import {ref} from "vue";
+import {ref, computed} from "vue";
 const navbar = ref(false);
 function closeNavbar(){
     navbar.value = false;
 }
 function showNavbar(){
     navbar.value = true;
-}
+}/*
+import { usePage } from '@inertiajs/vue3';
+let page = usePage()
+let user = computed(() => page.props.user)*/
+let user = null;
 </script>
