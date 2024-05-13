@@ -46,9 +46,10 @@ class LeadController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Lead $lead)
     {
-        //
+        $lead->load(['status']);
+        return inertia('Leads/Show', ['lead'=>$lead]);
     }
 
     /**
