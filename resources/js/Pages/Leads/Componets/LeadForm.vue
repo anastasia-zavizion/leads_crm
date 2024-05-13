@@ -87,17 +87,18 @@ const props = defineProps({
 
 const title = computed(()=> props.method === 'POST' ? 'Create Lead' : 'Update Lead')
 
+
 const form = useForm({
-    name: props.lead.name ?? '',
-    first_name:props.lead.first_name ?? '',
-    address:props.lead.address ?? '',
-    postcode:props.lead.postcode ?? '',
-    city:props.lead.city ?? '',
-    country:props.lead.country ?? '',
-    phone:props.lead.phone ?? '',
-    email:props.lead.email ?? '',
-    description:props.lead.description ?? '',
-    lead_status_id:props.lead.lead_status_id ?? 1
+    name: (props.lead && props.lead.name) ?? '',
+    first_name: (props.lead && props.lead.first_name) ?? '',
+    address: (props.lead && props.lead.address) ?? '',
+    postcode: (props.lead && props.lead.postcode) ?? '',
+    city: (props.lead && props.lead.city) ?? '',
+    country: (props.lead && props.lead.country) ?? '',
+    phone: (props.lead && props.lead.phone) ?? '',
+    email: (props.lead && props.lead.email) ?? '',
+    description: (props.lead && props.lead.description) ?? '',
+    lead_status_id: (props.lead && props.lead.lead_status_id) ?? 1,
 });
 
 function handleRequest(){

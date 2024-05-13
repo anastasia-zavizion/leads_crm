@@ -1,6 +1,10 @@
 <template>
 <div>
 
+    <div>
+        <Link class="linkBtn" :href="route('leads.create')">Create Lead</Link>
+    </div>
+
     <div class="mt-4">
         <Table>
             <template #header>
@@ -49,6 +53,7 @@ const props = defineProps({
 })
 
 import common from "../../common.js";
+
 const {confirm} = common();
 
 </script>
