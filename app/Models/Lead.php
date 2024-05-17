@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\LeadStatus;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 
 
@@ -41,6 +42,10 @@ class Lead extends Model
         return Attribute::make(
             get: fn (string $value) => floatval($value)
         );
+    }
+
+    public function tasks():HasMany{
+        return $this->hasMany(Task::class);
     }
 
 }

@@ -1,7 +1,6 @@
 <template>
-    <div class="mb-4 flex gap-4">
-        <Link class="btn" :href="route('leads.tasks.create', props.lead.id)">Add New Task</Link>
-        <Link class="btn" :href="route('leads.tasks.index', props.lead.id)">Lead Tasks</Link>
+    <div class="mb-4">
+        <Link class="btn">Add New Task</Link>
     </div>
     <LeadInfo :lead="props.lead"/>
 </template>
