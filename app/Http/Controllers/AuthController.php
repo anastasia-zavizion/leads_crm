@@ -20,7 +20,7 @@ class AuthController extends Controller
         ]), true)){
 
             $request->session()->regenerate(); //regenerate session for security
-            return redirect()->intended();
+            return redirect()->route('leads.index');
         }else{
             throw ValidationException::withMessages([
                 'email'=> 'Authentication failed'

@@ -12,7 +12,7 @@
             </button>
         </div>
 
-        <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+        <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
             <li>
                 <Link class="menuLink" :href="route('leads.index')">Home</Link>
             </li>
@@ -27,7 +27,17 @@
 
         </ul>
 
-        <Link v-if="!user" class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" :href="route('login')">Sign In</Link>
+       <ul class="hidden absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/2 items-center text-center lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
+
+           <li v-if="user" class="mb-1 items-center justify-center flex">
+               <span class="font-bold text-white">{{user.name}}</span> <Link  method="DELETE" as="button"  title="Logout" class=" lg:inline-block lg:ml-auto text-white text-sm text-gray-900 font-bold transition duration-200" :href="route('logout')"><ArrowRightOnRectangleIcon class="icon"/></Link>
+           </li>
+
+           <li v-if="!user" class="mb-1">
+               <Link class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" :href="route('login')">Sign In</Link>
+           </li>
+       </ul>
+
     </nav>
 
     <div v-if="navbar" class="navbar-menu relative z-50">
@@ -44,7 +54,7 @@
                 </button>
             </div>
             <div>
-                <ul class="test">
+                <ul>
                     <li v-if="user" class="mb-1 bg-violet-500">
                         <Link class="menuLink" :href="route('leads.index')">Leads</Link>
                     </li>
@@ -53,11 +63,16 @@
                         <Link class="menuLink" :href="route('map.index')">Map</Link>
                     </li>
 
+                    <li v-if="user" class="mb-1 flex gap-2">
+                        <span class="font-bold text-black">{{user.name}}</span> <Link method="DELETE" as="button" title="Logout" class="lg:inline-block lg:ml-auto lg:mr-3 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" :href="route('logout')"><ArrowRightOnRectangleIcon class="icon"/></Link>
+                    </li>
+
                     <li v-if="!user" class="mb-1">
-                        <Link class="w-full block lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" :href="route('login')">Sign In</Link>
+                        <Link class="lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" :href="route('login')">Sign In</Link>
                     </li>
 
                 </ul>
+
             </div>
         </nav>
     </div>
@@ -65,6 +80,7 @@
 
 <script setup>
 import {Link} from "@inertiajs/vue3";
+import {ArrowRightOnRectangleIcon} from "@heroicons/vue/24/solid";
 
 import {ref, computed} from "vue";
 const navbar = ref(false);
