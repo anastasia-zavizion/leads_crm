@@ -5,6 +5,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TaskReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +30,5 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::resource('leads.tasks',TaskController::class);
 Route::get('tasks',[TaskController::class,'allTasks'])->name('tasks.index');
+
+Route::get('tasks/report',TaskReportController::class)->name('tasks.report');

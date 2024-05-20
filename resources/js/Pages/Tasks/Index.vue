@@ -1,7 +1,13 @@
 <template>
 <div>
 
-    <div v-if="props.lead">
+    <div v-if="props.tasks.data" class="mb-4">
+        <form @submit.prevent="generatePdf">
+          <Button>Generate PDF Report</Button>
+        </form>
+    </div>
+
+    <div v-if="props.lead" class="mb-4">
         <Link class="linkBtn" :href="route('leads.show',props.lead.id)">Back to Lead</Link>
     </div>
 
@@ -41,18 +47,36 @@
 import TableTh from "../Layouts/Form/TableTh.vue";
 import Table from "../Layouts/Form/Table.vue";
 import TableTd from "../Layouts/Form/TableTd.vue";
-import {Link} from "@inertiajs/vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import { PencilIcon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import LeadStatus from "./Componets/LeadStatus.vue";
-
+import axios from 'axios';
 const props = defineProps({
-    tasks:Array,
+    tasks:Object,
     lead:Object
 })
 
 import common from "../../common.js";
+import {computed} from "vue";
+import Button from "../Layouts/Form/Button.vue";
 
 const {confirm} = common();
 
+function generatePdf(){
+    const url = props.lead ? route('tasks.report', { lead: props.lead }) : route('tasks.report');
+    axios.get(url, { responseType: 'blob' })
+        .then(response => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'task_report.pdf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch(error => {
+            console.error('Error generating PDF:', error);
+        });
+}
 </script>
