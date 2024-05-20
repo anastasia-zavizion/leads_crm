@@ -1,7 +1,7 @@
 <template>
 <div>
 
-    <div>
+    <div v-if="props.lead">
         <Link class="linkBtn" :href="route('leads.show',props.lead.id)">Back to Lead</Link>
     </div>
 

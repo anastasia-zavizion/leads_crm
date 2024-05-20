@@ -28,3 +28,4 @@ Route::post('login', [AuthController::class, 'store'])->name('login.store');
 Route::delete('logout', [AuthController::class, 'destroy'])->name('logout');
 
 Route::resource('leads.tasks',TaskController::class);
+Route::get('tasks',[TaskController::class,'allTasks'])->name('tasks.index');

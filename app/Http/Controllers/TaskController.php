@@ -17,6 +17,12 @@ class TaskController extends Controller
 
     }
 
+    public function allTasks()
+    {
+        return inertia('Tasks/Index', ['tasks'=>Task::with('lead')->paginate(10)]);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -40,7 +46,8 @@ class TaskController extends Controller
      */
     public function show(Lead $lead,Task $task)
     {
-        //
+        return inertia('Tasks/Show', ['lead'=>$lead,'task'=>$task]);
+
     }
 
     /**
@@ -67,6 +74,8 @@ class TaskController extends Controller
      */
     public function destroy(Lead $lead,Task $task)
     {
-        //
+        $task->delete();
+        return redirect()->route('leads.tasks.index',$lead)->with('success','Task was deleted!');
+
     }
 }

@@ -17,6 +17,10 @@
                 <Link class="menuLink" :href="route('leads.index')">Home</Link>
             </li>
 
+            <li>
+                <Link class="menuLink" :href="route('tasks.index')">Tasks</Link>
+            </li>
+
             <li v-if="user">
                 <Link class="menuLink" :href="route('leads.index')">Leads</Link>
             </li>
@@ -57,6 +61,10 @@
                 <ul>
                     <li v-if="user" class="mb-1 bg-violet-500">
                         <Link class="menuLink" :href="route('leads.index')">Leads</Link>
+                    </li>
+
+                    <li v-if="user" class="mb-1 bg-violet-500">
+                        <Link class="menuLink" :href="route('tasks.index')">Tasks</Link>
                     </li>
 
                     <li v-if="user" class="mb-1 bg-violet-500">
