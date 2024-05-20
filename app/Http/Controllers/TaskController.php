@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Models\Lead;
 use App\Models\Task;
-use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -32,7 +31,7 @@ class TaskController extends Controller
     public function store(Lead $lead,TaskRequest $request)
     {
         $validated = $request->validated();
-        $lead->tasks()->save(Task::make($validated));
+        $lead->tasks()->create($validated);
         return redirect()->route('leads.tasks.index',$lead)->with('success','Task was saved');
     }
 

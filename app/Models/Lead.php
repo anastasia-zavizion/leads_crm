@@ -10,11 +10,12 @@ use App\Models\LeadStatus;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Notifications\Notifiable;
 
 
 class Lead extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     public static $gender = ['M','F'];
     public static $status = [
         ['name'=>'New Lead', 'color'=>'green', 'Customer'=>'orange', 'Deleted'=>'red']
