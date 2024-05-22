@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Models\Lead;
 use App\Models\Task;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class TaskController extends Controller
 {
@@ -13,14 +15,23 @@ class TaskController extends Controller
      */
     public function index(Lead $lead)
     {
-        return inertia('Tasks/Index', ['lead'=>$lead,'tasks'=>$lead->tasks()->with('lead')->paginate(10)]);
+        $tasks = Cache::tags('tasks')->rememberForever(
+            'tasks:' . $lead->id . '_page_' . request('page', 1),
+            function () use ($lead) {
+                return $lead->tasks()->with('lead')->paginate(10);
+            }
+        );
 
+        return inertia('Tasks/Index', ['lead'=>$lead,'tasks'=>$tasks]);
     }
 
     public function allTasks()
     {
-        return inertia('Tasks/Index', ['tasks'=>Task::with('lead')->paginate(10)]);
+        $tasks = Cache::tags('tasks')->rememberForever('tasks:page'.request('page_',1),function (){
+            return Task::with('lead')->paginate(10);
+        });
 
+        return inertia('Tasks/Index', ['tasks'=>$tasks]);
     }
 
     /**
@@ -44,19 +55,27 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Lead $lead,Task $task)
+    public function show(Lead $lead, $task)
     {
-        return inertia('Tasks/Show', ['lead'=>$lead,'task'=>$task]);
+        $task = Cache::tags('tasks')->rememberForever(
+            'task:' . $task,
+            function () use ($task) {
+                return Task::findOrFail($task);
+            }
+        );
 
+        return inertia('Tasks/Show', ['lead'=>$lead,'task'=>$task]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Lead $lead,Task $task)
+    public function edit(Lead $lead,$task)
     {
+        $task = Cache::tags('tasks')->rememberForever('task:'.$task,function () use ($task){
+            return Task::findOrFail($task);
+        });
         return inertia('Tasks/Edit', ['lead'=>$lead,'task'=>$task]);
-
     }
 
     /**

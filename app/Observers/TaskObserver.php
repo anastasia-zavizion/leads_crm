@@ -4,14 +4,20 @@ namespace App\Observers;
 
 use App\Models\Task;
 use App\Notifications\TaskCreated;
+use Illuminate\Support\Facades\Cache;
 
 class TaskObserver
 {
+    private function clearCache(){
+        Cache::tags('tasks')->flush();
+    }
     /**
      * Handle the Task "created" event.
      */
     public function created(Task $task): void
     {
+        $this->clearCache();
+        Cache::tags('tasks')->put('task:'.$task->id,$task);
         $task->load(['lead']);
         $task->lead->notify(new TaskCreated($task));
     }
@@ -21,7 +27,8 @@ class TaskObserver
      */
     public function updated(Task $task): void
     {
-        //
+        $this->clearCache();
+        Cache::tags('tasks')->put('task:'.$task->id,$task);
     }
 
     /**
@@ -29,7 +36,7 @@ class TaskObserver
      */
     public function deleted(Task $task): void
     {
-        //
+        $this->clearCache();
     }
 
     /**
